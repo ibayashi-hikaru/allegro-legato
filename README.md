@@ -22,7 +22,7 @@ Required environment (with versions confirmed to work.)
 - Torch: 1.11.0
 - wandb: 0.13.5
 
-With those external modules and libraries installed, run the following command to install the nequip library and allegro library with legato extension.
+With those external modules and libraries installed, run the following commands to install the nequip library and allegro library with legato extension.
 ```bash
 cd nequip && pip install .
 ```
@@ -34,7 +34,7 @@ Then, you run the following to compile LAMMPS environment.
 ```bash
 bash compile_lammps.sh
 ```
-## Execution
+## Run
 We provide three features to build and try Allegro-Legato:
 - Training: `python train.py`
 - Measuring sharpness: `python measure_sharpness.py`
