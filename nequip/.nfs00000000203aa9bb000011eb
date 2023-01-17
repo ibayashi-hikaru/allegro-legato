@@ -1,0 +1,1 @@
+salloc  --gres=gpu:a100:2 --account=anakano_81 --partition=gpu --time=23:59:59 --mem=64GB

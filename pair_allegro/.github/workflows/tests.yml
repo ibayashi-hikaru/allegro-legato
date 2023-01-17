@@ -1,0 +1,67 @@
+name: Run LAMMPS-Python tests
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.9]
+        torch-version: [1.11.0]
+        nequip-branch: ["main"]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      env:
+        TORCH: "${{ matrix.torch-version }}"
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        sudo apt update
+        sudo apt install -y cmake
+        python -m pip install --upgrade pip
+        pip install torch==${TORCH} -f https://download.pytorch.org/whl/cpu/torch_stable.html
+        pip install pytest mkl-include
+        wget -q https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-$TORCH%2Bcpu.zip
+        unzip -q libtorch-cxx11-abi-shared-with-deps-$TORCH+cpu.zip
+    - name: Install MPI
+      run: |
+        sudo apt install -y libopenmpi-dev --fix-missing
+    - name: Install NequIP
+      env:
+          NEQUIP: "${{ matrix.nequip-branch }}"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        pip install "https://github.com/mir-group/nequip/archive/main.zip"
+        # git clone --depth=1 "https://github.com/mir-group/allegro"
+        # cd allegro
+        # pip install .
+        pip install "https://github.com/mir-group/allegro/archive/main.zip"
+    - name: Fetch and build LAMMPS
+      run: |
+        mkdir lammps_dir/
+        cd lammps_dir/
+        git clone -b stable_29Sep2021_update2 --depth 1 "https://github.com/lammps/lammps"
+        cd ..
+        ./patch_lammps.sh lammps_dir/lammps/
+        cd lammps_dir/lammps/
+        mkdir build/
+        cd build/
+        cmake ../cmake -DCMAKE_BUILD_TYPE=Release -DPKG_KOKKOS=ON -DKokkos_ENABLE_OPENMP=ON -DCMAKE_PREFIX_PATH=../../../libtorch -DMKL_INCLUDE_DIR=`python -c "import sysconfig;from pathlib import Path;print(Path(sysconfig.get_paths()[\"include\"]).parent)"`
+        make -j$(nproc)
+        echo "LAMMPS in dir"
+        pwd
+        ls lmp
+        cd ../../..
+        echo "Now in dir"
+        pwd
+    - name: Run tests with pytest
+      run: |
+        # See https://github.com/pytest-dev/pytest/issues/1075
+        LAMMPS=`pwd`/lammps_dir/lammps/build/lmp pytest tests/

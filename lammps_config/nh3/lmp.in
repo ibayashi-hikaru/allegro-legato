@@ -1,0 +1,52 @@
+
+units metal
+atom_style atomic
+dimension 3
+
+# set newton on for pair_allegro (off for pair_nequip)
+newton on
+boundary p p p
+read_data ${dat}
+
+# if you want to run a larger system, simply replicate the system in space
+variable rep equal 2
+replicate ${rep} ${rep} ${rep}
+#replicate 2 2 2
+
+# allegro pair style
+pair_style      allegro
+pair_coeff	* * ${pot} ${elem}
+group g1 type 1
+group g2 type 2
+
+velocity all create ${temp} 1234567 loop geom
+
+neighbor 1.0 bin
+neigh_modify delay 1 every 1
+
+timestep ${timestep}
+thermo 10
+thermo_modify flush yes lost ignore
+
+fix  1 all nvt temp ${temp} ${temp} $(100*dt) # nose-hoover thermostat
+#fix  1 all npt temp 300 300 $(100*dt) tri 1.0 1.0 $(1000*dt)
+
+# compute rdf and average after some equilibration
+comm_modify cutoff 7.0
+
+#compute RDF all rdf 1000 1 1 1 2 2 2 cutoff 6.0
+#fix RDF all ave/time 1000 1 1000 c_RDF[*] file rdf_${suffix}.txt mode vector
+#compute MSD1 g1 msd com no average no
+#compute MSD2 g2 msd com no average no
+#fix MSD all ave/time 1 999 1000 c_MSD1[1] c_MSD1[2] c_MSD1[3] c_MSD1[4] c_MSD2[1] c_MSD2[2] c_MSD2[3] c_MSD2[4] file msd_${suffix}.txt #mode vector
+
+# run
+run 1000000
+
+# unfix 1
+# fix  1 all nve 
+# dump 1 all custom 1 dump_${suffix}.lammpstrj id type x y z fx fy fz ix iy iz element
+# dump_modify 1 sort id pad 9 element ${elem}
+# run
+# run 6000
+
