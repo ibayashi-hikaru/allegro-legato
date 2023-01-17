@@ -36,7 +36,7 @@ We provide three features to build and try Allegro-Legato:
 - Measuring sharpness: `python measure_sharpness.py`
 - Measuring $t_\text{failure}$: `python measure_t_failure.py`
 
-Note: $t_\text{failure}$ mean the number of steps until the simulation breaks. Allegro-Legato has larger $t_\text{failure}$ than the original Allegro, i.e. more robust.
+Note: $t_\text{failure}$ mean the number of steps until the simulation breaks. Allegro-Legato has larger $t_\text{failure}$ than the original Allegro, i.e., more robust.
 ### Start Minimally
 To check if those three features work on your environment, first run the following command as a sanity-check. 
 
@@ -45,3 +45,6 @@ python train.py --sanity-check;
 python measure_sharpness.py --sanity-check;
 python measure_t_failure.py --sanity-check;
 ```
+## Contact
+If you have questions, reach out to [Hikaru Ibayashi](https://viterbi-web.usc.edu/~ibayashi/).
+
