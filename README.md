@@ -1,4 +1,3 @@
-
 ![image](logo.png)
 This repository implements an extension of the [Allegro](https://github.com/mir-group/allegro), **Allegro-Legato** (meaning fast and smooth).
 Allegro-Legato provides a neural-network molecular dynamics (MD) simulator with enhanced robustness, i.e., the MD simulation runs for a long time without failure.
@@ -8,7 +7,7 @@ If you have questions about this repository, feel free to reach out to me (ibaya
 
 
 ## Installation
-Note: This implementation assumes HPC environment.
+Note: This implementation assumes an HPC environment.
 Required environment (with versions confirmed to work.)
 - gcc: 8.3.0
 - git: 2.25.0
@@ -29,8 +28,8 @@ Then, you run the following to compile the LAMMPS environment.
 bash compile_lammps.sh
 ```
 Please refer [Allegro installation instructions](https://github.com/mir-group/allegro#installation) to see the detailed dependencies.
-## Run
-We provide three features to build and try Allegro-Legato:
+## Usage
+We provide the following three features. Simply execute the python scripts and you can enjoy each feature parallelized on HPC.  
 - Training: `python train.py`
 - Measuring sharpness: `python measure_sharpness.py`
 - Measuring $t_\text{failure}$: `python measure_t_failure.py`
