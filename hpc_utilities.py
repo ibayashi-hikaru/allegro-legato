@@ -89,12 +89,12 @@ class Sbatch:
         self.sbatch_name = ""
         self.contents_list = []
 
-    def header(self, gpu_type="a100", memory=64, ntasks=64,
-               account="", gpu_num=1, partition="gpu", time="23:59:59"):
+    def header(self, gpu_type="a100", memory=64, ntasks=64, gpu_num=1, partition="gpu", time="23:59:59"):
+        hpc_account = "your_account"
         header_contents = []
         header_contents.append(f"#!/bin/bash")
-        header_contents.append(f"#SBATCH --account={account}")
-        header_contents.append(f"#SBATCH --gres=gpu:{gpu_type}:1")
+        header_contents.append(f"#SBATCH --account={hpc_account}")
+        header_contents.append(f"#SBATCH --gres=gpu:{gpu_type}:{gpu_num}")
         header_contents.append(f"#SBATCH --partition={partition}")
         header_contents.append(f"#SBATCH --time={time}")
         header_contents.append(f"#SBATCH --mem={memory}GB")

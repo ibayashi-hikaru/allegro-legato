@@ -17,7 +17,7 @@ if __name__ == "__main__":
     for pot in pots:
         sbatch = Sbatch()
         # The very first run need many nodes and large memory to preprocess data
-        sbatch.header(ntasks=32, gpu_type="a100", memory=128, account="your_account")
+        sbatch.header(ntasks=32, gpu_type="a100", memory=128)
         sbatch.add_command(f"rm -rf results/{pot};")
         sbatch.add_command(f"nequip-train allegro/configs/{pot}.yaml;")
         id = sbatch.submit_job()
@@ -29,7 +29,7 @@ if __name__ == "__main__":
     job_pool = JobPool(f"Training")
     for pot in pots:
         sbatch = Sbatch()
-        sbatch.header(ntasks=4, gpu_type="a100", memory=32, account="your_account")
+        sbatch.header(ntasks=4, gpu_type="a100", memory=32)
         sbatch.add_command(f"nequip-train allegro/configs/{pot}.yaml;")
         id = sbatch.submit_job()
         job_pool.add_job(id)

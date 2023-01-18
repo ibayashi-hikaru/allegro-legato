@@ -24,7 +24,7 @@ def lammps_script(pot, ntasks, temp, timestep):
 
 def submit_lammps_job(pot, ntasks, temp, timestep):
     sbatch = Sbatch()
-    sbatch.header(ntasks=ntasks, gpu_type="a100", account="your_account")
+    sbatch.header(ntasks=ntasks, gpu_type="a100")
     sbatch.add_command(f"cd {root_dir}/results/{pot};")
     sbatch.add_command(lammps_script(pot, ntasks, temp, timestep))
     return sbatch.submit_job()
