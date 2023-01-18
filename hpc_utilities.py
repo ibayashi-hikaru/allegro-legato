@@ -3,9 +3,6 @@ import os
 os.environ['OPENBLAS_NUM_THREADS'] = '1'
 import time
 from enum import Enum
-import matplotlib.pyplot as plt
-import numpy as np
-import glob
 import secrets
 
 
@@ -85,7 +82,7 @@ class JobPool:
     def __del__(self):
         for job in self.job_states:
             os.system(f"scancel {job}")
-            os.system(f"rm slurm-{job}.out")
+            # os.system(f"rm slurm-{job}.out")
 
 class Sbatch:
     def __init__(self) -> None:
