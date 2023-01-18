@@ -24,7 +24,7 @@ def lammps_script(pot, ntasks, temp, timestep):
 
 def submit_lammps_job(pot, ntasks, temp, timestep):
     sbatch = Sbatch()
-    sbatch.header(ntasks=ntasks, gpu_type="a100")
+    sbatch.header(ntasks=ntasks, gpu_type="a100", account="your_account")
     sbatch.add_command(f"cd {root_dir}/results/{pot};")
     sbatch.add_command(lammps_script(pot, ntasks, temp, timestep))
     return sbatch.submit_job()
@@ -70,7 +70,7 @@ if __name__ == "__main__":
                                        timestep=0.0025)
             job_pool.add_job(job_id)
         job_pool.submitted = True
-    # Wait until all jobs are done and dump line visualization
+    # Wait until all jobs are done and dump results
     while True:
         os.system(f"clear")
         print(f"Mearuring t_failure")

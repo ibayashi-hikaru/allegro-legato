@@ -90,7 +90,7 @@ class Sbatch:
         self.contents_list = []
 
     def header(self, gpu_type="a100", memory=64, ntasks=64,
-               account="anakano_81", gpu_num=1, partition="gpu", time="23:59:59"):
+               account="", gpu_num=1, partition="gpu", time="23:59:59"):
         header_contents = []
         header_contents.append(f"#!/bin/bash")
         header_contents.append(f"#SBATCH --account={account}")

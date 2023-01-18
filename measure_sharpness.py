@@ -11,7 +11,7 @@ def submit_measure_sharpness_jobs(train_dir, epsilon, sample_num, parallel_num):
         os.system(f"rm {file_name}")
     os.system(f"rm results/{job_pool.pot}/sharpness.dat")
     sbatch = Sbatch()
-    sbatch.header(ntasks=4, gpu_type="a100")
+    sbatch.header(ntasks=4, gpu_type="a100", account="your_account")
     sbatch.add_command(
         f"python nequip/nequip/scripts/measure_sharpness.py --train-dir {train_dir} --epsilon {epsilon} --sample-num {int(sample_num / parallel_num)}")
     job_ids = []
@@ -58,7 +58,7 @@ if __name__ == "__main__":
                                                 train_dir=f"results/{job_pool.pot}")
         job_pool.add_jobs(job_ids)
         job_pool.submitted = True
-    # Wait until all jobs are done and dump line visualization
+    # Wait until all jobs are done and dump results
     while True:
         os.system(f"clear")
         print(f"Mearuring sharpness")
