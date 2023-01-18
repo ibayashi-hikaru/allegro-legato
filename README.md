@@ -9,10 +9,6 @@ If you have questions about this repository, feel free to reach out to me (ibaya
 
 ## Installation
 Note: This implementation assumes HPC environment.
-Our implementation is based on `allegro` package.
-Please refer [Allegro installation instructions](https://github.com/mir-group/allegro#installation) to see the detailed dependencies.
-
-
 Required environment (with versions confirmed to work.)
 - gcc: 8.3.0
 - git: 2.25.0
@@ -21,31 +17,30 @@ Required environment (with versions confirmed to work.)
 - Python: 3.10.8
 - wandb: 0.13.5
 
-With those external modules and libraries installed, run the following commands to install the nequip library and allegro library with legato extension.
+With those external modules and libraries installed, run the following commands to install the nequip library and allegro library with the legato extension.
 ```bash
 cd nequip && pip install .
 ```
 ```bash
 cd allegro &&  pip install .
 ```
-
-Then, you run the following to compile LAMMPS environment.
+Then, you run the following to compile the LAMMPS environment.
 ```bash
 bash compile_lammps.sh
 ```
+Please refer [Allegro installation instructions](https://github.com/mir-group/allegro#installation) to see the detailed dependencies.
 ## Run
 We provide three features to build and try Allegro-Legato:
 - Training: `python train.py`
 - Measuring sharpness: `python measure_sharpness.py`
 - Measuring $t_\text{failure}$: `python measure_t_failure.py`
 
-Note: $t_\text{failure}$ mean the number of steps until the simulation breaks. Allegro-Legato has larger $t_\text{failure}$ than the original Allegro, i.e., more robust.
+Note: $t_\text{failure}$ means the number of steps until the simulation breaks. Allegro-Legato has larger $t_\text{failure}$ than the original Allegro, i.e., more robust.
 ### Start Minimally
-To check if those three features work on your environment, first run the following command as a sanity-check. 
+To check if those three features work on your environment, first run the following command as a sanity check. 
 
 ```bash
 python train.py --sanity-check;
 python measure_sharpness.py --sanity-check;
 python measure_t_failure.py --sanity-check;
 ```
-
