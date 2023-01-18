@@ -19,7 +19,6 @@ Required environment (with versions confirmed to work.)
 - cmake: 3.16.2
 - cuda: 11.3.0
 - Python: 3.10.8
-- PyTorch: 1.11.0 and 1.12.1
 - wandb: 0.13.5
 
 With those external modules and libraries installed, run the following commands to install the nequip library and allegro library with legato extension.
