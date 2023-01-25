@@ -43,7 +43,7 @@ if __name__ == "__main__":
             "nh3/legato_L1_rho_0_025",
             "nh3/legato_L1_rho_0_05"]
 
-    if sys.argv[1] == "--sanity-check":
+    if len(sys.argv) > 1 and sys.argv[1] == "--sanity-check":
         pots = ["nh3/sanity_checker", "nh3/sanity_checker_legato"]
     epsilon = 0.05
     sample_num = 100
