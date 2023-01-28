@@ -15,7 +15,6 @@ Required environment (with versions confirmed to work.)
 - cuda: 11.3.0
 - Python: 3.10.8
 - wandb: 0.13.5
-- ase: 3.20.1 
 
 With those external modules and libraries installed, run the following commands to install the nequip library and allegro library with the legato extension.
 ```bash
