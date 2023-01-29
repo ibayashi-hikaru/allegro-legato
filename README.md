@@ -18,6 +18,9 @@ Required environment (with versions confirmed to work.)
 
 With those external modules and libraries installed, run the following commands to install the nequip library and allegro library with the legato extension.
 ```bash
+pip install torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchaudio==0.11.0 --extra-index-url https://download.pytorch.org/whl/cu113
+```
+```bash
 cd nequip && pip install .
 ```
 ```bash
