@@ -3,8 +3,9 @@
 <br>
 
 
+
 <p align="center">
-![demo](https://user-images.githubusercontent.com/15017849/224506915-73d9e814-adcb-49e2-b1c3-a67b5bc82c7c.gif)
+  <img src="https://user-images.githubusercontent.com/15017849/224506915-73d9e814-adcb-49e2-b1c3-a67b5bc82c7c.gif" alt="animated" />
 </p>
 
 <br><br>
