@@ -1,5 +1,8 @@
 ![image](logo.png)
 
+
+![demo](https://user-images.githubusercontent.com/15017849/224492988-f50cae65-0371-4178-848a-ec3daf2fa809.mov)
+
 ![demo](https://user-images.githubusercontent.com/15017849/224492839-5fc1c686-60ab-424f-81dd-623520e9afad.mp4)
 
 This repository implements an extension of the [Allegro](https://github.com/mir-group/allegro), Allegro-Legato, which provides a neural-network molecular dynamics (MD) simulator with enhanced robustness.
