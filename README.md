@@ -1,5 +1,6 @@
 ![image](logo.png)
-![demo](demo.mp4)
+<video src="./demo.mp4" controls="controls" style="max-width: 730px;">
+</video>
 This repository implements an extension of the [Allegro](https://github.com/mir-group/allegro), Allegro-Legato, which provides a neural-network molecular dynamics (MD) simulator with enhanced robustness.
 Allegro-Legato realizes the MD simulation for a long time without failure.
 This legato extension is developed by [Hikaru Ibayashi](http://hikaru-ibayashi.com/).
