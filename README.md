@@ -1,7 +1,5 @@
 ![image](logo.png)
-
-
-![demo](https://user-images.githubusercontent.com/15017849/224492988-f50cae65-0371-4178-848a-ec3daf2fa809.mov)
+[![Watch the video](https://i.imgur.com/vKb2F1B.png)](https://youtu.be/vt5fpE0bzSY)
 
 ![demo](https://user-images.githubusercontent.com/15017849/224492839-5fc1c686-60ab-424f-81dd-623520e9afad.mp4)
 
