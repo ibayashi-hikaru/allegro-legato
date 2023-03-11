@@ -8,6 +8,7 @@
   <img src="demo.gif" alt="animated" />
 </p>
 
+![demo](demo.gif)
 
 <br>
 
