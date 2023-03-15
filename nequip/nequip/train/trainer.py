@@ -726,6 +726,9 @@ class Trainer:
 
         self.num_weights = sum(p.numel() for p in self.model.parameters())
         self.logger.info(f"Number of weights: {self.num_weights}")
+        self.logger.info(
+            f"Number of trainable weights: {sum(p.numel() for p in self.model.parameters() if p.requires_grad)}"
+        )
 
         self.rescale_layers = []
         outer_layer = self.model
@@ -768,6 +771,7 @@ class Trainer:
             )
 
     def train(self):
+
         """Training"""
         if getattr(self, "dl_train", None) is None:
             raise RuntimeError("You must call `set_dataset()` before calling `train()`")
@@ -805,6 +809,7 @@ class Trainer:
     def batch_step(self, data, validation=False):
         # no need to have gradients from old steps taking up memory
         self.optim.zero_grad(set_to_none=True)
+
         if validation:
             self.model.eval()
         else:
@@ -830,6 +835,7 @@ class Trainer:
             if k not in self._remove_from_model_input
         }
         out = self.model(input_data)
+        del input_data
 
         # If we're in evaluation mode (i.e. validation), then
         # data_unscaled's target prop is unnormalized, and out's has been rescaled to be in the same units
@@ -1132,6 +1138,7 @@ class Trainer:
                     log_str[category] += f" {value:12.3g}"
                     log_header[category] += f" {key:>12.12}"
                 self.mae_dict[f"{category}_{key}"] = value
+
         if self.iepoch == 0:
             self.init_epoch_logger.info(header)
             self.init_epoch_logger.info(mat_str)
@@ -1200,12 +1207,14 @@ class Trainer:
                     )
 
                 self.train_idcs = idcs[: self.n_train]
-                self.val_idcs = idcs[self.n_train: self.n_train + self.n_val]
+                self.val_idcs = idcs[self.n_train : self.n_train + self.n_val]
             else:
                 if self.n_train > len(dataset):
                     raise ValueError("Not enough data in dataset for requested n_train")
                 if self.n_val > len(validation_dataset):
-                    raise ValueError("Not enough data in dataset for requested n_train")
+                    raise ValueError(
+                        "Not enough data in validation dataset for requested n_val"
+                    )
                 if self.train_val_split == "random":
                     self.train_idcs = torch.randperm(
                         len(dataset), generator=self.dataset_rng
