@@ -71,8 +71,7 @@ python measure_sharpness.py --sanity-check;
 python measure_t_failure.py --sanity-check;
 ```
 
---- 
-The main focus of this repository is model training. Thus Since this code is intended for the short-term simulation to tune the hyper-parameter, $\rho$, (Sec. 2.3), simulations terminate after the system temperature deviates by more than 100 degree.
+ Since this code is intended for the short-term simulation to tune the hyper-parameter, $\rho$, (Sec. 2.3), simulations terminate after the system temperature deviates by more than 100 degree.
 
 However, if you want to continue running your simulation as long as possible, please comment out [this line](https://github.com/ibayashi-hikaru/allegro-legato/blob/main/lammps/src/utils.cpp#L154C29-L154C29) and recompile LAMMPS.
 
