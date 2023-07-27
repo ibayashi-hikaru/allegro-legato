@@ -11,11 +11,24 @@
 This repository implements an extension of the [Allegro](https://github.com/mir-group/allegro), Allegro-Legato, which provides a neural-network molecular dynamics (MD) simulator with enhanced robustness.
 Allegro-Legato realizes the MD simulation for a long time without failure.
 This legato extension is developed by [Hikaru Ibayashi](https://hikaru-ibayashi.com/).
-If you have questions about this repository, feel free to reach out to me (ibayashi[at]alumni.usc.edu).
 
-
+When you use Allegro-Legato in your paper, please use the following BibTeX to cite.
+```
+@inproceedings{ibayashi2023allegro,
+  title={Allegro-Legato: Scalable, Fast, and Robust Neural-Network Quantum Molecular Dynamics via Sharpness-Aware Minimization},
+  author={Ibayashi, Hikaru and Razakh, Taufeq Mohammed and Yang, Liqiu and Linker, Thomas and Olguin, Marco and Hattori, Shinnosuke and Luo, Ye and Kalia, Rajiv K and Nakano, Aiichiro and Nomura, Ken-ichi and others},
+  booktitle={International Conference on High Performance Computing},
+  pages={223--239},
+  year={2023},
+  organization={Springer}
+}
+```
 - [https://arxiv.org/abs/2303.08169](https://arxiv.org/abs/2303.08169)
 - [https://link.springer.com/chapter/10.1007/978-3-031-32041-5_12](https://link.springer.com/chapter/10.1007/978-3-031-32041-5_12)
+
+
+
+If you have questions about this repository, feel free to contact me (ibayashi[at]alumni.usc.edu).
 
 ## Installation
 Note: This implementation assumes an HPC environment.
@@ -50,10 +63,20 @@ We provide the following three features. Simply execute the python scripts and y
 
 Note: $t_\text{failure}$ means the number of steps until the simulation breaks. Allegro-Legato has larger $t_\text{failure}$ than the original Allegro, i.e., more robust.
 ### Start Minimally
-To check if those three features work on your environment, first run the following command as a sanity check. 
+To check if those three features work on your environment, first, run the following command as a sanity check. 
 
 ```bash
 python train.py --sanity-check;
 python measure_sharpness.py --sanity-check;
 python measure_t_failure.py --sanity-check;
 ```
+
+--- 
+The main focus of this repository is model training. Thus Since this code is intended for the short-term simulation to tune the hyper-parameter, $\rho$, (Sec. 2.3), simulations terminate after the system temperature deviates by more than 100 degree.
+
+However, if you want to continue running your simulation as long as possible, please comment out [this line](https://github.com/ibayashi-hikaru/allegro-legato/blob/main/lammps/src/utils.cpp#L154C29-L154C29) and recompile LAMMPS.
+
+
+
+
+
