@@ -56,7 +56,7 @@ bash compile_lammps.sh
 ```
 Please refer [Allegro installation instructions](https://github.com/mir-group/allegro#installation) to see the detailed dependencies.
 ## Usage
-We provide the following three features. Simply execute the python scripts and you can enjoy each feature parallelized on HPC.  
+We provide the following three features. Simply execute the Python scripts and you can enjoy each feature parallelized on HPC.  
 - Training: `python train.py`
 - Measuring sharpness: `python measure_sharpness.py`
 - Measuring $t_\text{failure}$: `python measure_t_failure.py`
@@ -71,7 +71,9 @@ python measure_sharpness.py --sanity-check;
 python measure_t_failure.py --sanity-check;
 ```
 
- Since this code is intended for the short-term simulation to tune the hyper-parameter, $\rho$, (Sec. 2.3), simulations terminate after the system temperature deviates by more than 100 degree.
+
+## Long term simulation
+Since this code is intended for the short-term simulation to tune the hyper-parameter, $\rho$, (Sec. 2.3), simulations terminate after the system temperature deviates by more than 100 degree.
 
 However, if you want to continue running your simulation as long as possible, please comment out [this line](https://github.com/ibayashi-hikaru/allegro-legato/blob/main/lammps/src/utils.cpp#L154C29-L154C29) and recompile LAMMPS.
 
