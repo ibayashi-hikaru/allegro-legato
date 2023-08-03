@@ -835,7 +835,6 @@ class Trainer:
             if k not in self._remove_from_model_input
         }
         out = self.model(input_data)
-        del input_data
 
         # If we're in evaluation mode (i.e. validation), then
         # data_unscaled's target prop is unnormalized, and out's has been rescaled to be in the same units
